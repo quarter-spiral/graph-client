@@ -10,10 +10,18 @@ module Graph
 
     def initialize(url)
       @client = Service::Client.new(url)
-      @client.urls.add(:role, :get,"/#{API_VERSION}/entities/:uuid:/roles")
-      @client.urls.add(:role, :post, "/#{API_VERSION}/entities/:uuid:/roles/:role:")
-      @client.urls.add(:role, :delete,  "/#{API_VERSION}/entities/:uuid:/roles/:role:")
+
+      # Roles
+      @client.urls.add(:role, :get,    "/#{API_VERSION}/entities/:uuid:/roles")
+      @client.urls.add(:role, :post,   "/#{API_VERSION}/entities/:uuid:/roles/:role:")
+      @client.urls.add(:role, :delete, "/#{API_VERSION}/entities/:uuid:/roles/:role:")
       @client.urls.add(:everyone_with_role, :get,  "/#{API_VERSION}/roles/:role:")
+
+      # Relationships
+      @client.urls.add(:relationship, :get,      "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
+      @client.urls.add(:relationship, :post,     "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
+      @client.urls.add(:relationship, :delete,   "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
+      @client.urls.add(:relationship_list, :get, "/#{API_VERSION}/entities/:uuid:/:relation_type:")
     end
 
     def list_roles(uuid)
@@ -22,19 +30,35 @@ module Graph
 
     def add_role(uuid, role)
       @client.post(@client.urls.role(uuid: uuid, role: role))
-      true
-    rescue Service::Client::ResponseError => e
-      return false if e.response.status == 404
-      raise e
     end
 
     def remove_role(uuid, role)
       @client.delete(@client.urls.role(uuid: uuid, role: role))
-      true
     end
 
     def uuids_by_role(role)
       @client.get(@client.urls.everyone_with_role(role: role)).data
+    end
+
+    def related?(uuid1, uuid2, relation_type)
+      @client.get(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type))
+      true
+    rescue Service::Client::ServiceError => e
+      return false if e.error == "Not found"
+      raise e
+    end
+
+    def add_relationship(uuid1, uuid2, relation_type, options = {})
+      direction = options.delete(:direction)
+      @client.post(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type), direction: direction)
+    end
+
+    def remove_relationship(uuid1, uuid2, relation_type)
+      @client.delete(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type))
+    end
+
+    def list_related_entities(uuid, relation_type)
+      @client.get(@client.urls.relationship_list(uuid: uuid, relation_type: relation_type)).data
     end
   end
 end

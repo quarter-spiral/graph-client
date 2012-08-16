@@ -35,3 +35,35 @@ client.add_role(uuid, 'developer')
 ```ruby
 client.remove_role(uuid, 'developer')
 ```
+
+### Relationships
+
+#### Check for a relationship
+
+```ruby
+client.related?(uuid1, uuid2, 'develops')
+```
+
+#### Add a relationship
+
+```ruby
+options = {direction: 'both'}
+client.add_relationship(uuid1, uuid2, 'developer', options)
+```
+
+Available options:
+
+* **direction**: Direction of the relationship. Possible values:
+  ``outgoing`` (default), ``incoming`` and ``both``
+
+#### Remove a relationship
+
+```ruby
+client.remove_relationship(uuid1, uuid2, 'developer')
+```
+
+#### List related entities to an entity
+
+```ruby
+client.list_related_entities(uuid, 'develops') # => [uuid1, uuid2]
+```
