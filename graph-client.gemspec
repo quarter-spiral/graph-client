@@ -4,8 +4,8 @@ require File.expand_path('../lib/graph-client/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Thorben Schröder"]
   gem.email         = ["info@thorbenschroeder.de"]
-  gem.description   = %q{Client to the datastore-backend.}
-  gem.summary       = %q{Client to the datastore-backend.}
+  gem.description   = %q{Client to the graph-backend.}
+  gem.summary       = %q{Client to the graph-backend.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
