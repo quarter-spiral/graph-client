@@ -48,7 +48,7 @@ client.related?(uuid1, uuid2, 'develops')
 
 ```ruby
 options = {direction: 'both'}
-client.add_relationship(uuid1, uuid2, 'developer', options)
+client.add_relationship(uuid1, uuid2, 'develops', options)
 ```
 
 Available options:
@@ -59,7 +59,7 @@ Available options:
 #### Remove a relationship
 
 ```ruby
-client.remove_relationship(uuid1, uuid2, 'developer')
+client.remove_relationship(uuid1, uuid2, 'develops')
 ```
 
 #### List related entities to an entity
