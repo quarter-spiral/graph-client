@@ -57,8 +57,9 @@ module Graph
       @client.delete(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type))
     end
 
-    def list_related_entities(uuid, relation_type)
-      @client.get(@client.urls.relationship_list(uuid: uuid, relation_type: relation_type)).data
+    def list_related_entities(uuid, relation_type, options = {})
+      direction = options.delete(:direction)
+      @client.get(@client.urls.relationship_list(uuid: uuid, relation_type: relation_type), direction: direction).data
     end
   end
 end

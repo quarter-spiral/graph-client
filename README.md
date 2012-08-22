@@ -65,5 +65,10 @@ client.remove_relationship(uuid1, uuid2, 'develops')
 #### List related entities to an entity
 
 ```ruby
-client.list_related_entities(uuid, 'develops') # => [uuid1, uuid2]
+client.list_related_entities(uuid, 'develops', options) # => [uuid1, uuid2]
 ```
+
+Available options:
+
+* **direction**: Direction of the relationships. Possible values:
+  ``outgoing`` (default), ``incoming`` and ``both``

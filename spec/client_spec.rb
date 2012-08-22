@@ -57,6 +57,11 @@ describe Graph::Client do
   end
 
   describe "relations" do
+    before do
+      @client.add_role(@entity1, 'developer')
+      @client.add_role(@entity2, 'developer')
+    end
+
     describe "adding a relation" do
       it "works outgoing" do
         @client.related?(@entity1, @entity2, 'develops').must_equal false
@@ -102,9 +107,11 @@ describe Graph::Client do
     it "can list related entities" do
       @entity3 = UUID.new.generate
       @entity4 = UUID.new.generate
+      @client.add_role(@entity3, 'developer')
 
       @client.add_relationship(@entity1, @entity2, 'develops')
       @client.add_relationship(@entity1, @entity4, 'develops')
+      @client.add_relationship(@entity2, @entity4, 'develops')
 
       @client.add_relationship(@entity2, @entity3, 'develops', direction: 'both')
 
@@ -118,7 +125,7 @@ describe Graph::Client do
       related_entities_to_2.wont_include @entity1
       related_entities_to_2.wont_include @entity2
       related_entities_to_2.must_include @entity3
-      related_entities_to_2.wont_include @entity4
+      related_entities_to_2.must_include @entity4
 
       related_entities_to_3 = @client.list_related_entities(@entity3, 'develops')
       related_entities_to_3.wont_include @entity1
@@ -131,6 +138,18 @@ describe Graph::Client do
       related_entities_to_4.wont_include @entity2
       related_entities_to_4.wont_include @entity3
       related_entities_to_4.wont_include @entity4
+
+      related_incoming_entities_to_4 = @client.list_related_entities(@entity4, 'develops', direction: 'incoming')
+      related_incoming_entities_to_4.must_include @entity1
+      related_incoming_entities_to_4.must_include @entity2
+      related_incoming_entities_to_4.wont_include @entity3
+      related_incoming_entities_to_4.wont_include @entity4
+
+      any_way_related_entities_to_2 = @client.list_related_entities(@entity2, 'develops', direction: 'both')
+      any_way_related_entities_to_2.must_include @entity1
+      any_way_related_entities_to_2.wont_include @entity2
+      any_way_related_entities_to_2.must_include @entity3
+      any_way_related_entities_to_2.must_include @entity4
     end
   end
 end
