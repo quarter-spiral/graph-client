@@ -22,6 +22,9 @@ module Graph
       @client.urls.add(:relationship, :post,     "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
       @client.urls.add(:relationship, :delete,   "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
       @client.urls.add(:relationship_list, :get, "/#{API_VERSION}/entities/:uuid:/:relation_type:")
+
+      # Entities
+      @client.urls.add(:entities, :delete, "/#{API_VERSION}/entities/:uuid:")
     end
 
     def list_roles(uuid)
@@ -60,6 +63,10 @@ module Graph
     def list_related_entities(uuid, relation_type, options = {})
       direction = options.delete(:direction)
       @client.get(@client.urls.relationship_list(uuid: uuid, relation_type: relation_type), direction: direction).data
+    end
+
+    def delete_entity(uuid)
+      @client.delete(@client.urls.entities(uuid))
     end
   end
 end

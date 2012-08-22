@@ -72,3 +72,9 @@ Available options:
 
 * **direction**: Direction of the relationships. Possible values:
   ``outgoing`` (default), ``incoming`` and ``both``
+
+#### Remove an entity and all of it's relations
+
+```ruby
+client.delete_entity(uuid)
+```

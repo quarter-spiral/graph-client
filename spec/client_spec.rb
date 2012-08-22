@@ -151,5 +151,34 @@ describe Graph::Client do
       any_way_related_entities_to_2.must_include @entity3
       any_way_related_entities_to_2.must_include @entity4
     end
+
+    it "can remove an entity with all of it's relations" do
+      @entity3 = UUID.new.generate
+
+      @client.add_relationship(@entity1, @entity2, 'develops')
+      @client.add_relationship(@entity1, @entity3, 'develops')
+      @client.add_relationship(@entity2, @entity1, 'develops')
+      @client.add_relationship(@entity2, @entity3, 'develops')
+
+      related_entities_to_1 = @client.list_related_entities(@entity1, 'develops')
+      related_entities_to_1.wont_include @entity1
+      related_entities_to_1.must_include @entity2
+      related_entities_to_1.must_include @entity3
+
+      related_entities_to_2 = @client.list_related_entities(@entity2, 'develops')
+      related_entities_to_2.must_include @entity1
+      related_entities_to_2.wont_include @entity2
+      related_entities_to_2.must_include @entity3
+
+      @client.delete_entity(@entity1)
+
+      related_entities_to_1 = @client.list_related_entities(@entity1, 'develops')
+      related_entities_to_1.empty?.must_equal true
+
+      related_entities_to_2 = @client.list_related_entities(@entity2, 'develops')
+      related_entities_to_2.wont_include @entity1
+      related_entities_to_2.wont_include @entity2
+      related_entities_to_2.must_include @entity3
+    end
   end
 end
