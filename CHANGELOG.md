@@ -1,3 +1,8 @@
+# 0.0.4
+
+* Moves the private gem server credentials to the gem server to make
+  it possible to deploy with Heroku again
+
 # 0.0.3
 
 * Moves the gem dependencies to our privat gem server
