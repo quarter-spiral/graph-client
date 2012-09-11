@@ -1,16 +1,14 @@
 source 'https://rubygems.org'
+source "https://user:#{ENV['QS_GEMS_PASSWORD']}@privategems.herokuapp.com/"
 
 # Specify your gem's dependencies in graph-client.gemspec
 gemspec
 
 # gem 'service-client', path: '../service-client'
-gem 'service-client', git: 'git@github.com:quarter-spiral/service-client.git', :tag => 'release-0.0.4'
-
-gem 'commander'
 
 group :development, :test do
   # gem 'graph-backend', path: '../graph-backend'
-  gem 'graph-backend', git: 'git@github.com:quarter-spiral/graph-backend.git', tag: 'release-0.0.3'
+  gem 'graph-backend', '0.0.3'
 
   gem 'uuid'
   gem 'rack-test'
