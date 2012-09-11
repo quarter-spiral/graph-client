@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-source "https://user:#{ENV['QS_GEMS_PASSWORD']}@privategems.herokuapp.com/"
+source "https://user:We267RFF7BfwVt4LdqFA@privategems.herokuapp.com/"
 
 # Specify your gem's dependencies in graph-client.gemspec
 gemspec
