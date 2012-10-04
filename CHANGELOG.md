@@ -1,3 +1,7 @@
+# 0.0.5
+
+* Adds OAuth support
+
 # 0.0.4
 
 * Moves the private gem server credentials to the gem server to make
