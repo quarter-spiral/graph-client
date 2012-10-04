@@ -27,46 +27,46 @@ module Graph
       @client.urls.add(:entities, :delete, "/#{API_VERSION}/entities/:uuid:")
     end
 
-    def list_roles(uuid)
-      @client.get(@client.urls.role(uuid: uuid)).data
+    def list_roles(uuid,token )
+      @client.get(@client.urls.role(uuid: uuid), token).data
     end
 
-    def add_role(uuid, role)
-      @client.post(@client.urls.role(uuid: uuid, role: role))
+    def add_role(uuid, token, role)
+      @client.post(@client.urls.role(uuid: uuid, role: role), token)
     end
 
-    def remove_role(uuid, role)
-      @client.delete(@client.urls.role(uuid: uuid, role: role))
+    def remove_role(uuid, token, role)
+      @client.delete(@client.urls.role(uuid: uuid, role: role), token)
     end
 
-    def uuids_by_role(role)
-      @client.get(@client.urls.everyone_with_role(role: role)).data
+    def uuids_by_role(token, role)
+      @client.get(@client.urls.everyone_with_role(role: role), token).data
     end
 
-    def related?(uuid1, uuid2, relation_type)
-      @client.get(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type))
+    def related?(uuid1, uuid2, token, relation_type)
+      @client.get(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type), token)
       true
     rescue Service::Client::ServiceError => e
       return false if e.error == "Not found"
       raise e
     end
 
-    def add_relationship(uuid1, uuid2, relation_type, options = {})
+    def add_relationship(uuid1, uuid2, token, relation_type, options = {})
       direction = options.delete(:direction)
-      @client.post(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type), direction: direction)
+      @client.post(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type), token, direction: direction)
     end
 
-    def remove_relationship(uuid1, uuid2, relation_type)
-      @client.delete(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type))
+    def remove_relationship(uuid1, uuid2, token, relation_type)
+      @client.delete(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type), token)
     end
 
-    def list_related_entities(uuid, relation_type, options = {})
+    def list_related_entities(uuid, token, relation_type, options = {})
       direction = options.delete(:direction)
-      @client.get(@client.urls.relationship_list(uuid: uuid, relation_type: relation_type), direction: direction).data
+      @client.get(@client.urls.relationship_list(uuid: uuid, relation_type: relation_type), token, direction: direction).data
     end
 
-    def delete_entity(uuid)
-      @client.delete(@client.urls.entities(uuid))
+    def delete_entity(uuid, token)
+      @client.delete(@client.urls.entities(uuid), token)
     end
   end
 end

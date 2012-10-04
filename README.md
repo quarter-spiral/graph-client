@@ -21,19 +21,19 @@ client = Graph::Client.new('http://graph-backend.dev')
 #### List all UUIDs with a role
 
 ```ruby
-client.uuids_by_role(role)
+client.uuids_by_role(token, role)
 ```
 
 #### Add a role
 
 ```ruby
-client.add_role(uuid, 'developer')
+client.add_role(uuid, token, 'developer')
 ```
 
 #### Remove a role
 
 ```ruby
-client.remove_role(uuid, 'developer')
+client.remove_role(uuid, token, 'developer')
 ```
 
 ### Relationships
@@ -41,14 +41,14 @@ client.remove_role(uuid, 'developer')
 #### Check for a relationship
 
 ```ruby
-client.related?(uuid1, uuid2, 'develops')
+client.related?(uuid1, uuid2, token, 'develops')
 ```
 
 #### Add a relationship
 
 ```ruby
 options = {direction: 'both'}
-client.add_relationship(uuid1, uuid2, 'develops', options)
+client.add_relationship(uuid1, uuid2, token, 'develops', options)
 ```
 
 Available options:
@@ -59,13 +59,13 @@ Available options:
 #### Remove a relationship
 
 ```ruby
-client.remove_relationship(uuid1, uuid2, 'develops')
+client.remove_relationship(uuid1, uuid2, token, 'develops')
 ```
 
 #### List related entities to an entity
 
 ```ruby
-client.list_related_entities(uuid, 'develops', options) # => [uuid1, uuid2]
+client.list_related_entities(uuid, token, 'develops', options) # => [uuid1, uuid2]
 ```
 
 Available options:
@@ -76,5 +76,5 @@ Available options:
 #### Remove an entity and all of it's relations
 
 ```ruby
-client.delete_entity(uuid)
+client.delete_entity(uuid, token)
 ```
