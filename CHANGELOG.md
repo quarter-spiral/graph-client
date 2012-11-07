@@ -1,3 +1,7 @@
+# 0.0.6 WIP
+
+* Bumps service-client to handle 304s from the graph-backend
+
 # 0.0.5
 
 * Adds OAuth support

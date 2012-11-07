@@ -4,8 +4,6 @@ source "https://user:We267RFF7BfwVt4LdqFA@privategems.herokuapp.com/"
 # Specify your gem's dependencies in graph-client.gemspec
 gemspec
 
-# gem 'service-client', path: '../service-client'
-
 group :development, :test do
   #gem 'graph-backend', path: '../graph-backend'
   gem 'graph-backend', '0.0.6'

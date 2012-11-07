@@ -15,6 +15,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Graph::Client::VERSION
 
-  gem.add_dependency 'service-client', '>= 0.0.6'
+  gem.add_dependency 'service-client', '>= 0.0.8'
   gem.add_dependency 'commander'
 end
