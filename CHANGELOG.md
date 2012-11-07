@@ -1,4 +1,4 @@
-# 0.0.6 WIP
+# 0.0.6
 
 * Bumps service-client to handle 304s from the graph-backend
 
