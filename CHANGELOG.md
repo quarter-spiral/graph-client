@@ -1,3 +1,7 @@
+# 0.0.7 WIP
+
+* Bumps service-client to handle empty response bodies
+
 # 0.0.6
 
 * Bumps service-client to handle 304s from the graph-backend
