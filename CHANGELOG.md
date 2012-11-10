@@ -1,4 +1,4 @@
-# 0.0.7 WIP
+# 0.0.7
 
 * Bumps service-client to handle empty response bodies
 
