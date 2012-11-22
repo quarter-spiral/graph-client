@@ -1,4 +1,4 @@
-# 0.0.8 WIP
+# 0.0.8
 
 * Adopts the new relationship meta data concept from graph-backend
 
