@@ -196,5 +196,16 @@ describe Graph::Client do
       related_entities_to_2.wont_include @entity2
       related_entities_to_2.must_include @entity3
     end
+
+    it "can create relationships with meta data and retrieve the metadata" do
+      @entity3 = UUID.new.generate
+
+      @client.add_relationship(@entity1, @entity2, token, 'develops', meta: {os: "Linux"}, direction: 'both')
+
+      @client.relationship_metadata(@entity1, @entity2, token, 'develops').must_equal("os" => "Linux")
+      @client.relationship_metadata(@entity2, @entity1, token, 'develops').must_equal("os" => "Linux")
+
+      @client.relationship_metadata(@entity1, @entity3, token, 'develops').must_be_nil
+    end
   end
 end

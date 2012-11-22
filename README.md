@@ -44,6 +44,14 @@ client.remove_role(uuid, token, 'developer')
 client.related?(uuid1, uuid2, token, 'develops')
 ```
 
+#### Get a relationship's meta data
+
+Returns a Hash with the meta data or nil if the relationship does not exist.
+
+```ruby
+client.relationship_metadata(uuid1, uuid2, token, 'develops')
+```
+
 #### Add a relationship
 
 ```ruby
@@ -55,6 +63,7 @@ Available options:
 
 * **direction**: Direction of the relationship. Possible values:
   ``outgoing`` (default), ``incoming`` and ``both``
+* **meta**: Meta information to this relationship. Must be a shallow, one level deep hash (works: ``{location: 'Rome'}`` does not work: ``{location: {city: 'Rome'}}``).
 
 #### Remove a relationship
 

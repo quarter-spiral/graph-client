@@ -51,9 +51,17 @@ module Graph
       raise e
     end
 
+    def relationship_metadata(uuid1, uuid2, token, relation_type)
+      @client.get(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type), token).data['meta']
+    rescue Service::Client::ServiceError => e
+      return nil if e.error == "Not found"
+      raise e
+    end
+
     def add_relationship(uuid1, uuid2, token, relation_type, options = {})
       direction = options.delete(:direction)
-      @client.post(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type), token, direction: direction)
+      meta = options.delete(:meta) || {}
+      @client.post(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type), token, direction: direction, meta: meta)
     end
 
     def remove_relationship(uuid1, uuid2, token, relation_type)
@@ -62,7 +70,7 @@ module Graph
 
     def list_related_entities(uuid, token, relation_type, options = {})
       direction = options.delete(:direction)
-      @client.get(@client.urls.relationship_list(uuid: uuid, relation_type: relation_type), token, direction: direction).data
+      @client.get(@client.urls.relationship_list(uuid: uuid, relation_type: relation_type), token, direction: direction).data.map {|c| c['target']}
     end
 
     def delete_entity(uuid, token)

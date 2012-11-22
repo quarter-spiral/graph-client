@@ -1,3 +1,7 @@
+# 0.0.8 WIP
+
+* Adopts the new relationship meta data concept from graph-backend
+
 # 0.0.7
 
 * Bumps service-client to handle empty response bodies
