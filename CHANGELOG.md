@@ -1,4 +1,4 @@
-# 0.0.9 WIP
+# 0.0.9
 
 * Adds the query API from graph-backend
 
