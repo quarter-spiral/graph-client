@@ -65,6 +65,12 @@ Available options:
   ``outgoing`` (default), ``incoming`` and ``both``
 * **meta**: Meta information to this relationship. Must be a shallow, one level deep hash (works: ``{location: 'Rome'}`` does not work: ``{location: {city: 'Rome'}}``).
 
+#### Issue a cypher query
+
+```ruby
+client.query(token, [player_uuid], "MATCH node0-[:friends]->()-[:friends]->fof RETURN fof.uuid")
+```
+
 #### Remove a relationship
 
 ```ruby

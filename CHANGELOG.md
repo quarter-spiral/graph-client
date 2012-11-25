@@ -1,3 +1,7 @@
+# 0.0.9 WIP
+
+* Adds the query API from graph-backend
+
 # 0.0.8
 
 * Adopts the new relationship meta data concept from graph-backend

@@ -109,6 +109,29 @@ describe Graph::Client do
       end
     end
 
+    it "can issue cypher queries" do
+      @player1 = UUID.new.generate
+      @client.add_role(@player1, token, 'player')
+      @player2 = UUID.new.generate
+      @client.add_role(@player2, token, 'player')
+      @player3 = UUID.new.generate
+      @client.add_role(@player3, token, 'player')
+      @player4 = UUID.new.generate
+      @client.add_role(@player4, token, 'player')
+      @player5 = UUID.new.generate
+      @client.add_role(@player5, token, 'player')
+
+      @client.add_relationship(@player1, @player2, token, 'friends')
+      @client.add_relationship(@player1, @player5, token, 'friends')
+      @client.add_relationship(@player2, @player3, token, 'friends')
+      @client.add_relationship(@player2, @player4, token, 'friends')
+
+      fofs = @client.query(token, [@player1], "MATCH node0-[:friends]->()-[:friends]->fof RETURN fof.uuid").data
+      fofs.size.must_equal 2
+      fofs.must_include [@player3]
+      fofs.must_include [@player4]
+    end
+
     it "can remove a relationship" do
       @client.related?(@entity1, @entity2, token, 'develops').must_equal false
       @client.related?(@entity2, @entity1, token, 'develops').must_equal false

@@ -6,17 +6,18 @@ gemspec
 
 group :development, :test do
   #gem 'graph-backend', path: '../graph-backend'
-  gem 'graph-backend', '0.0.12'
+  gem 'graph-backend', '0.0.13'
 
   gem 'uuid'
   gem 'rack-test'
   gem 'rake'
   gem 'rack-client'
 
-  gem 'auth-backend', '~> 0.0.3'
+  gem 'auth-backend', '~> 0.0.14'
+  gem 'nokogiri'
   gem 'sqlite3'
   gem 'sinatra_warden', git: 'https://github.com/quarter-spiral/sinatra_warden.git'
   gem 'songkick-oauth2-provider', git: 'https://github.com/quarter-spiral/oauth2-provider.git'
 
-  gem 'auth-client', '~> 0.0.6'
+  gem 'auth-client', '~> 0.0.13'
 end

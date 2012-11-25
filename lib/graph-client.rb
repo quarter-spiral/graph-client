@@ -22,6 +22,7 @@ module Graph
       @client.urls.add(:relationship, :post,     "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
       @client.urls.add(:relationship, :delete,   "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
       @client.urls.add(:relationship_list, :get, "/#{API_VERSION}/entities/:uuid:/:relation_type:")
+      @client.urls.add(:query, :get, "/#{API_VERSION}/query/:uuids:")
 
       # Entities
       @client.urls.add(:entities, :delete, "/#{API_VERSION}/entities/:uuid:")
@@ -33,6 +34,10 @@ module Graph
 
     def add_role(uuid, token, role)
       @client.post(@client.urls.role(uuid: uuid, role: role), token)
+    end
+
+    def query(token, uuids, query)
+      @client.get(@client.urls.query(uuids: uuids.join("/")), token, query: query)
     end
 
     def remove_role(uuid, token, role)
