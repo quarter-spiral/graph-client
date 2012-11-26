@@ -28,7 +28,7 @@ module Graph
       @client.urls.add(:entities, :delete, "/#{API_VERSION}/entities/:uuid:")
     end
 
-    def list_roles(uuid,token )
+    def list_roles(uuid,token)
       @client.get(@client.urls.role(uuid: uuid), token).data
     end
 
@@ -37,7 +37,7 @@ module Graph
     end
 
     def query(token, uuids, query)
-      @client.get(@client.urls.query(uuids: uuids.join("/")), token, query: query)
+      @client.get(@client.urls.query(uuids: uuids.join("/")), token, query: query).data
     end
 
     def remove_role(uuid, token, role)

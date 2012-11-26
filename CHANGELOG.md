@@ -1,3 +1,7 @@
+# 0.0.10 WIP
+
+* Fixes bug in the query API that caused a wrong return format
+
 # 0.0.9
 
 * Adds the query API from graph-backend

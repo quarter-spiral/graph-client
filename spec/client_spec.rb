@@ -126,7 +126,7 @@ describe Graph::Client do
       @client.add_relationship(@player2, @player3, token, 'friends')
       @client.add_relationship(@player2, @player4, token, 'friends')
 
-      fofs = @client.query(token, [@player1], "MATCH node0-[:friends]->()-[:friends]->fof RETURN fof.uuid").data
+      fofs = @client.query(token, [@player1], "MATCH node0-[:friends]->()-[:friends]->fof RETURN fof.uuid")
       fofs.size.must_equal 2
       fofs.must_include [@player3]
       fofs.must_include [@player4]
