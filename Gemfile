@@ -6,7 +6,7 @@ gemspec
 
 group :development, :test do
   #gem 'graph-backend', path: '../graph-backend'
-  gem 'graph-backend', '0.0.13'
+  gem 'graph-backend', '0.0.15'
 
   gem 'uuid'
   gem 'rack-test'

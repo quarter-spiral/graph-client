@@ -20,6 +20,7 @@ module Graph
       # Relationships
       @client.urls.add(:relationship, :get,      "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
       @client.urls.add(:relationship, :post,     "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
+      @client.urls.add(:relationship, :put ,     "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
       @client.urls.add(:relationship, :delete,   "/#{API_VERSION}/entities/:uuid1:/:relation_type:/:uuid2:")
       @client.urls.add(:relationship_list, :get, "/#{API_VERSION}/entities/:uuid:/:relation_type:")
       @client.urls.add(:query, :get, "/#{API_VERSION}/query/:uuids:")
@@ -67,6 +68,12 @@ module Graph
       direction = options.delete(:direction)
       meta = options.delete(:meta) || {}
       @client.post(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type), token, direction: direction, meta: meta)
+    end
+
+    def change_relationship(uuid1, uuid2, token, relation_type, options = {})
+      direction = options.delete(:direction)
+      meta = options.delete(:meta) || {}
+      @client.put(@client.urls.relationship(uuid1: uuid1, uuid2: uuid2, relation_type: relation_type), token, direction: direction, meta: meta)
     end
 
     def remove_relationship(uuid1, uuid2, token, relation_type)

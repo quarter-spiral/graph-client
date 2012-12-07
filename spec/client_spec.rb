@@ -230,5 +230,14 @@ describe Graph::Client do
 
       @client.relationship_metadata(@entity1, @entity3, token, 'develops').must_be_nil
     end
+
+    it "can change relationships' meta data" do
+      @entity3 = UUID.new.generate
+
+      @client.add_relationship(@entity1, @entity2, token, 'develops', meta: {os: "Linux"})
+      @client.relationship_metadata(@entity1, @entity2, token, 'develops').must_equal("os" => "Linux")
+      @client.change_relationship(@entity1, @entity2, token, 'develops', meta: {os: "Windows"})
+      @client.relationship_metadata(@entity1, @entity2, token, 'develops').must_equal("os" => "Windows")
+    end
   end
 end

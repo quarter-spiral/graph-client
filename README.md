@@ -52,6 +52,14 @@ Returns a Hash with the meta data or nil if the relationship does not exist.
 client.relationship_metadata(uuid1, uuid2, token, 'develops')
 ```
 
+#### Change a relationship's meta data
+
+Returns normal information on the relationship. The same data you get when adding a relationship.
+
+```ruby
+client.change_relationship(uuid1, uuid2, token, 'develops', {location: "Berlin"})
+```
+
 #### Add a relationship
 
 ```ruby

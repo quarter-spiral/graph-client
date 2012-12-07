@@ -1,3 +1,7 @@
+# 0.0.11 WIP
+
+* Adds the ability to change a relationship's meta data
+
 # 0.0.10
 
 * Fixes bug in the query API that caused a wrong return format
