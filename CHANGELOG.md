@@ -1,3 +1,7 @@
+# 0.0.12 WIP
+
+* Updates dependencies
+
 # 0.0.11
 
 * Adds the ability to change a relationship's meta data

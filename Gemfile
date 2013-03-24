@@ -6,14 +6,14 @@ gemspec
 
 group :development, :test do
   #gem 'graph-backend', path: '../graph-backend'
-  gem 'graph-backend', '0.0.15'
+  gem 'graph-backend', '0.0.25'
 
   gem 'uuid'
   gem 'rack-test'
   gem 'rake'
   gem 'rack-client'
 
-  gem 'auth-backend', '~> 0.0.14'
+  gem 'auth-backend', '~> 0.0.28'
   gem 'nokogiri'
   gem 'sqlite3'
   gem 'sinatra_warden', git: 'https://github.com/quarter-spiral/sinatra_warden.git'
