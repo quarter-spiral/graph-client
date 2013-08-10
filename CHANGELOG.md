@@ -1,3 +1,7 @@
+# 0.0.13 / Unreleased
+
+* Bumps service-client dependency
+
 # 0.0.12
 
 * Updates dependencies
